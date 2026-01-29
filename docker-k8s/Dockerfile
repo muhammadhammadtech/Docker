@@ -1,16 +1,19 @@
 FROM node:18-alpine
 
+ENV NODE_ENV=production
+
 WORKDIR /usr/src/app
+
+# Create non-root user first
+RUN addgroup -S nodejs && adduser -S nodejs -G nodejs
 
 COPY package*.json ./
 RUN npm install --only=production
 
-COPY . .
+COPY --chown=nodejs:nodejs . .
+
+USER nodejs
 
 EXPOSE 8080
-
-RUN addgroup -g 1001 -S nodejs
-RUN adduser -S nodejs -u 1001
-USER nodejs
 
 CMD ["npm", "start"]
