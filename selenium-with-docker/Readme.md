@@ -1,4 +1,4 @@
-# Lab 39: Docker for Testing — Running Selenium with Docker
+# Docker for Testing — Running Selenium with Docker
 
 A complete walkthrough of pulling, running, and testing with Selenium inside a Docker container using Python and a virtual environment.
 
