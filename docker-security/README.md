@@ -1,4 +1,4 @@
-# Lab 43: Docker Security Best Practices
+# Docker Security Best Practices
 
 Hardening Docker containers using non-root users, read-only filesystems, capability dropping, AppArmor, and Content Trust.
 
