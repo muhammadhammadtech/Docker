@@ -1,0 +1,57 @@
+version: '3.8'
+
+services:
+  web:
+    image: swarm-web:latest
+    ports:
+      - "80:5000"
+    environment:
+      - REDIS_HOST=redis
+    networks:
+      - app-network
+    deploy:
+      replicas: 6
+      restart_policy:
+        condition: on-failure
+        delay: 5s
+        max_attempts: 3
+      update_config:
+        parallelism: 1
+        delay: 10s
+
+  redis:
+    image: redis:7-alpine
+    networks:
+      - app-network
+    deploy:
+      replicas: 1
+      restart_policy:
+        condition: on-failure
+    volumes:
+      - redis-data:/data
+
+  nginx:
+    image: nginx:alpine
+    ports:
+      - "8080:80"
+    networks:
+      - app-network
+    deploy:
+      replicas: 2
+      restart_policy:
+        condition: on-failure
+    configs:
+      - source: nginx-config
+        target: /etc/nginx/nginx.conf
+
+networks:
+  app-network:
+    driver: overlay
+    attachable: true
+
+volumes:
+  redis-data:
+
+configs:
+  nginx-config:
+    external: true
