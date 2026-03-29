@@ -8,12 +8,20 @@ docker trust inspect --pretty alpine:latest 2>/dev/null || echo "No trust data a
 echo ""
 echo "2. Pull with trust DISABLED:"
 export DOCKER_CONTENT_TRUST=0
-docker pull alpine:3.14 >/dev/null 2>&1 && echo "Pull succeeded (no verification)" || echo "Pull failed"
+if docker pull alpine:3.14 >/dev/null 2>&1; then
+    echo "Pull succeeded (no verification)"
+else
+    echo "Pull failed"
+fi
 
 echo ""
 echo "3. Pull with trust ENABLED:"
 export DOCKER_CONTENT_TRUST=1
-docker pull alpine:3.14 >/dev/null 2>&1 && echo "Pull succeeded (trust verified)" || echo "Pull failed — no trust data"
+if docker pull alpine:3.14 >/dev/null 2>&1; then
+    echo "Pull succeeded (verified)"
+else
+    echo "Pull failed (verification enforced)"
+fi
 
 echo ""
-echo "Trust enforcement active: unsigned images will be rejected."
+echo "=== Demo Complete ==="
