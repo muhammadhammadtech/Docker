@@ -1,4 +1,10 @@
 FROM nginx:alpine
-COPY index.html /usr/share/nginx/html/index.html
+
+# Set working directory
+WORKDIR /usr/share/nginx/html
+
+# Copy static files
+COPY index.html .
+
+# Expose port
 EXPOSE 80
-CMD ["nginx", "-g", "daemon off;"]
