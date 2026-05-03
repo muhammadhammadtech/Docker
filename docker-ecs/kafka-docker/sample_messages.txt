@@ -1,0 +1,3 @@
+{"level": "INFO", "service": "web-server", "message": "Server started successfully"}
+{"level": "ERROR", "service": "database", "message": "Connection timeout"}
+{"level": "WARN", "service": "cache", "message": "Memory usage high"}

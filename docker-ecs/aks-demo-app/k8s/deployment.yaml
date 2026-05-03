@@ -1,0 +1,29 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: aks-demo-app
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: aks-demo-app
+  template:
+    metadata:
+      labels:
+        app: aks-demo-app
+    spec:
+      containers:
+      - name: aks-demo-app
+        image: akslabregistry1767929307.azurecr.io/aks-demo-app:v1
+        ports:
+        - containerPort: 3000
+        livenessProbe:
+          httpGet:
+            path: /health
+            port: 3000
+          initialDelaySeconds: 30
+        readinessProbe:
+          httpGet:
+            path: /health
+            port: 3000
+          initialDelaySeconds: 5
