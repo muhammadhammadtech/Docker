@@ -1,0 +1,32 @@
+version: "3.9"
+
+services:
+  ml-app:
+    build: .
+    ports:
+      - "5000:5000"
+      - "8888:8888"
+    volumes:
+      - ./models:/app/models
+      - ./notebooks:/app/notebooks
+      - ./data:/app/data
+    environment:
+      DB_HOST: postgres
+      DB_NAME: mldb
+      DB_USER: mluser
+      DB_PASSWORD: mlpassword
+    depends_on:
+      - postgres
+    command: python src/ml_api.py
+
+  postgres:
+    image: postgres:14
+    environment:
+      POSTGRES_DB: mldb
+      POSTGRES_USER: mluser
+      POSTGRES_PASSWORD: mlpassword
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+
+volumes:
+  pgdata:

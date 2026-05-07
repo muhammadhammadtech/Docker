@@ -1,0 +1,9 @@
+export DOCKER_CONTENT_TRUST=1
+mkdir -p ~/.docker/trust
+export DOCKER_CONTENT_TRUST_SERVER=https://notary.docker.io
+
+# This will prompt you to set a passphrase — remember it
+docker trust key generate mykey
+
+# List generated keys
+ls -la ~/.docker/trust/

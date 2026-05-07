@@ -1,0 +1,18 @@
+{
+  "default": [
+    {
+      "type": "signedBy",
+      "keyType": "x509",
+      "keyPath": "./mykey.pub"
+    }
+  ],
+  "repositories": {
+    "library/alpine": [
+      {
+        "type": "signedBy",
+        "keyType": "x509",
+        "keyPath": "./docker-official.pub"
+      }
+    ]
+  }
+}

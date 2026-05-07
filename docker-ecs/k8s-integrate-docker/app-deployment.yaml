@@ -1,0 +1,20 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: k8s-lab-app
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: k8s-lab
+  template:
+    metadata:
+      labels:
+        app: k8s-lab
+    spec:
+      containers:
+      - name: app
+        image: k8s-lab-app:v1
+        imagePullPolicy: Never
+        ports:
+        - containerPort: 80
