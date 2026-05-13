@@ -1,0 +1,33 @@
+pipeline {
+    agent any
+
+    stages {
+        stage('Checkout') {
+            steps { checkout scm }
+        }
+
+        stage('SonarQube Scan') {
+            steps {
+                withSonarQubeEnv('SonarQube') {
+                    sh 'sonar-scanner'
+                }
+            }
+        }
+
+        stage('Build') {
+            steps {
+                sh 'docker build -t sample-node-app:$BUILD_NUMBER .'
+            }
+        }
+
+        stage('Deploy') {
+            steps {
+                sh '''
+                docker stop prod || true
+                docker rm prod || true
+                docker run -d --name prod -p 3000:3000 sample-node-app:$BUILD_NUMBER
+                '''
+            }
+        }
+    }
+}

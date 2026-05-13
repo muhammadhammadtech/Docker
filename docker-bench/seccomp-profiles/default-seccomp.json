@@ -1,0 +1,21 @@
+{
+  "defaultAction": "SCMP_ACT_ERRNO",
+  "architectures": [
+    "SCMP_ARCH_X86_64",
+    "SCMP_ARCH_X86",
+    "SCMP_ARCH_X32"
+  ],
+  "syscalls": [
+    {
+      "names": [
+        "accept","accept4","access","alarm","bind","brk","chdir","chmod",
+        "chown","close","connect","dup","dup2","execve","exit","exit_group",
+        "fchdir","fchmod","fchown","fcntl","fork","fstat","getcwd","getdents",
+        "getpid","getppid","getuid","listen","lseek","lstat","mkdir","mmap",
+        "munmap","open","openat","read","readlink","recv","recvfrom","rename",
+        "rmdir","send","sendto","socket","stat","unlink","wait4","write"
+      ],
+      "action": "SCMP_ACT_ALLOW"
+    }
+  ]
+}
