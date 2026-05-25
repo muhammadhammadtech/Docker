@@ -1,0 +1,53 @@
+---
+- name: Deploy WordPress with MySQL using Ansible
+  hosts: docker_hosts
+  become: yes
+  vars:
+    mysql_root_password: "secure_password_123"
+    wordpress_db_password: "wordpress_pass_456"
+
+  tasks:
+    - name: Create Docker network for WordPress
+      docker_network:
+        name: wordpress-network
+        driver: bridge
+
+    - name: Create Docker volume for MySQL data
+      docker_volume:
+        name: mysql-data
+
+    - name: Deploy MySQL container
+      docker_container:
+        name: wordpress-mysql
+        image: mysql:5.7
+        state: started
+        restart_policy: always
+        networks:
+          - name: wordpress-network
+        env:
+          MYSQL_ROOT_PASSWORD: "{{ mysql_root_password }}"
+          MYSQL_DATABASE: wordpress
+          MYSQL_USER: wordpress
+          MYSQL_PASSWORD: "{{ wordpress_db_password }}"
+        volumes:
+          - mysql-data:/var/lib/mysql
+
+    - name: Wait for MySQL to be ready
+      pause:
+        seconds: 15
+
+    - name: Deploy WordPress container
+      docker_container:
+        name: wordpress-app
+        image: wordpress:latest
+        state: started
+        restart_policy: always
+        ports:
+          - "8081:80"
+        networks:
+          - name: wordpress-network
+        env:
+          WORDPRESS_DB_HOST: wordpress-mysql:3306
+          WORDPRESS_DB_USER: wordpress
+          WORDPRESS_DB_PASSWORD: "{{ wordpress_db_password }}"
+          WORDPRESS_DB_NAME: wordpress
