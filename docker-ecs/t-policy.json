@@ -1,0 +1,36 @@
+{
+    "imageDetails": [
+        {
+            "registryId": "511000088260",
+            "repositoryName": "my-web-app",
+            "imageDigest": "sha256:9ebda752edecbf52dfea5a25d87e95736c65a6ec6ecb7d298792e5085b84f018",
+            "imageSizeInBytes": 1204,
+            "imagePushedAt": "2026-05-03T06:08:35.011000+00:00",
+            "imageManifestMediaType": "application/vnd.oci.image.manifest.v1+json",
+            "artifactMediaType": "application/vnd.oci.image.config.v1+json",
+            "imageStatus": "ACTIVE"
+        },
+        {
+            "registryId": "511000088260",
+            "repositoryName": "my-web-app",
+            "imageDigest": "sha256:5ce33ac887501b9ddb7f2608bd6c0514a2ef0f98d934df9fb02f214fcac9fad7",
+            "imageSizeInBytes": 26001630,
+            "imagePushedAt": "2026-05-03T06:08:35.038000+00:00",
+            "imageManifestMediaType": "application/vnd.oci.image.manifest.v1+json",
+            "artifactMediaType": "application/vnd.oci.image.config.v1+json",
+            "imageStatus": "ACTIVE"
+        },
+        {
+            "registryId": "511000088260",
+            "repositoryName": "my-web-app",
+            "imageDigest": "sha256:4c123d58953946da50eed3fe25ee86d14635fc4a7a68ceff86a32f26b3800d1c",
+            "imageTags": [
+                "latest"
+            ],
+            "imageSizeInBytes": 26001630,
+            "imagePushedAt": "2026-05-03T06:08:35.368000+00:00",
+            "imageManifestMediaType": "application/vnd.oci.image.index.v1+json",
+            "imageStatus": "ACTIVE"
+        }
+    ]
+}

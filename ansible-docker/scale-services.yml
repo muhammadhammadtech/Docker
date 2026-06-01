@@ -1,0 +1,50 @@
+---
+- name: Deploy Web Applications
+  hosts: web_servers
+  become: yes
+  vars:
+    app_replicas: 2
+    base_port: 8090
+    host_port_offset:
+      web1: 0
+      web2: 10
+
+  tasks:
+    - name: Pull application image
+      docker_image:
+        name: nginx
+        tag: latest
+        source: pull
+
+    - name: Create web content directory
+      file:
+        path: /opt/webapp
+        state: directory
+        mode: '0755'
+
+    - name: Create custom index page
+      copy:
+        content: |
+          <html>
+          <head><title>Scaled Web App</title></head>
+          <body>
+            <h1>Web Server: {{ inventory_hostname }}</h1>
+            <p>Deployed at: {{ ansible_date_time.iso8601 }}</p>
+          </body>
+          </html>
+        dest: /opt/webapp/index.html
+
+    - name: Deploy web application containers
+      docker_container:
+        name: "webapp-{{ inventory_hostname }}-{{ item }}"
+        image: nginx:latest
+        state: started
+        restart_policy: always
+        ports:
+          - "{{ base_port + host_port_offset[inventory_hostname] + item }}:80"
+        volumes:
+          - "/opt/webapp:/usr/share/nginx/html:ro"
+        labels:
+          service: "webapp"
+          host: "{{ inventory_hostname }}"
+      loop: "{{ range(app_replicas) | list }}"

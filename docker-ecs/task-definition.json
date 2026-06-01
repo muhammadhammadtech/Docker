@@ -1,0 +1,29 @@
+{
+    "family": "my-web-app-task",
+    "networkMode": "awsvpc",
+    "requiresCompatibilities": ["FARGATE"],
+    "cpu": "256",
+    "memory": "512",
+    "executionRoleArn": "arn:aws:iam::511000088260:role/ecsTaskExecutionRole",
+    "containerDefinitions": [
+        {
+            "name": "my-web-app-container",
+            "image": "511000088260.dkr.ecr.us-east-1.amazonaws.com/my-web-app:latest",
+            "portMappings": [
+                {
+                    "containerPort": 80,
+                    "protocol": "tcp"
+                }
+            ],
+            "essential": true,
+            "logConfiguration": {
+                "logDriver": "awslogs",
+                "options": {
+                    "awslogs-group": "/ecs/docker-ecs",
+                    "awslogs-region": "us-east-1",
+                    "awslogs-stream-prefix": "ecs"
+                }
+            }
+        }
+    ]
+}

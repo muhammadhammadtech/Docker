@@ -1,0 +1,50 @@
+---
+- name: Deploy Nginx Container with Ansible
+  hosts: docker_hosts
+  become: yes
+  tasks:
+    - name: Pull Nginx Docker image
+      docker_image:
+        name: nginx
+        tag: latest
+        source: pull
+
+    - name: Create custom HTML directory
+      file:
+        path: /tmp/nginx-content
+        state: directory
+        mode: '0755'
+
+    - name: Create custom HTML content
+      copy:
+        content: |
+          <html>
+          <head><title>Ansible + Docker Lab</title></head>
+          <body>
+            <h1>Welcome to Ansible + Docker Automation!</h1>
+            <p>This container was deployed using Ansible automation.</p>
+            <p>Deployment time: {{ ansible_date_time.iso8601 }}</p>
+          </body>
+          </html>
+        dest: /tmp/nginx-content/index.html
+        mode: '0644'
+
+    - name: Create Nginx container
+      docker_container:
+        name: nginx-web
+        image: nginx:latest
+        state: started
+        restart_policy: always
+        ports:
+          - "8080:80"
+        volumes:
+          - /tmp/nginx-content:/usr/share/nginx/html:ro
+
+    - name: Verify container is running
+      docker_container_info:
+        name: nginx-web
+      register: container_info
+
+    - name: Display container status
+      debug:
+        msg: "Container {{ container_info.container.Name }} is {{ container_info.container.State.Status }}"
