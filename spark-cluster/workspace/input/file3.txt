@@ -1,0 +1,80 @@
+Python is a versatile high level programming language for developers.
+Python supports object oriented functional and procedural paradigms.
+List comprehensions provide concise syntax for creating Python lists.
+Generators allow lazy evaluation of sequences in Python programs.
+Decorators modify the behavior of functions or classes in Python.
+Context managers handle resource acquisition and release cleanly.
+The with statement ensures proper cleanup of resources in Python.
+Virtual environments isolate Python package installations per project.
+pip is the standard package installer for Python packages today.
+NumPy provides support for large multidimensional arrays in Python.
+Pandas offers data structures for data manipulation and analysis.
+Matplotlib creates static animated and interactive visualizations.
+Scikit learn provides machine learning algorithms for Python users.
+TensorFlow and PyTorch are popular deep learning frameworks today.
+Jupyter notebooks allow interactive code execution and visualization.
+Version control systems track changes to source code over time.
+Git is the most widely used distributed version control system.
+Repositories store project history and enable team collaboration.
+Branches allow parallel development of different features in Git.
+Merging combines changes from different branches in Git repositories.
+Pull requests enable code review before merging changes in Git.
+Continuous integration automatically tests code changes in pipelines.
+Continuous deployment automatically releases tested code to production.
+Unit tests verify that individual components work correctly today.
+Integration tests verify that components work together properly.
+End to end tests simulate real user interactions with the system.
+Test driven development writes tests before writing implementation code.
+Code coverage measures how much code is exercised by test suites.
+Static analysis tools find bugs without running the actual code.
+Linters enforce code style and catch common programming mistakes.
+Documentation helps others understand and use your code effectively.
+Docstrings provide inline documentation for functions and classes.
+Type hints improve code readability and enable static type checking.
+Refactoring improves code structure without changing observable behavior.
+Design patterns are reusable solutions to common programming problems.
+The singleton pattern ensures only one instance of a class exists.
+The factory pattern creates objects without specifying exact classes.
+The observer pattern notifies dependents of state changes automatically.
+The strategy pattern defines interchangeable algorithms cleanly.
+SOLID principles guide object oriented design decisions effectively.
+Single responsibility means each class has one reason to change.
+Open closed principle says classes should be open for extension.
+Liskov substitution says subclasses should replace base classes.
+Interface segregation prefers small specific interfaces over large ones.
+Dependency inversion depends on abstractions not concrete implementations.
+APIs allow different software systems to communicate with each other.
+REST is an architectural style for building web services today.
+HTTP methods include GET POST PUT DELETE and PATCH for operations.
+JSON is the most common data format for REST APIs today.
+Authentication verifies identity while authorization controls access rights.
+Python is a versatile high level programming language for developers.
+Python supports object oriented functional and procedural paradigms.
+List comprehensions provide concise syntax for creating Python lists.
+Generators allow lazy evaluation of sequences in Python programs.
+Decorators modify the behavior of functions or classes in Python.
+Context managers handle resource acquisition and release cleanly.
+The with statement ensures proper cleanup of resources in Python.
+Virtual environments isolate Python package installations per project.
+pip is the standard package installer for Python packages today.
+NumPy provides support for large multidimensional arrays in Python.
+Pandas offers data structures for data manipulation and analysis.
+Matplotlib creates static animated and interactive visualizations.
+Scikit learn provides machine learning algorithms for Python users.
+TensorFlow and PyTorch are popular deep learning frameworks today.
+Jupyter notebooks allow interactive code execution and visualization.
+Version control systems track changes to source code over time.
+Git is the most widely used distributed version control system.
+Repositories store project history and enable team collaboration.
+Branches allow parallel development of different features in Git.
+Merging combines changes from different branches in Git repositories.
+Pull requests enable code review before merging changes in Git.
+Continuous integration automatically tests code changes in pipelines.
+Continuous deployment automatically releases tested code to production.
+Unit tests verify that individual components work correctly today.
+Integration tests verify that components work together properly.
+End to end tests simulate real user interactions with the system.
+Test driven development writes tests before writing implementation code.
+Code coverage measures how much code is exercised by test suites.
+Static analysis tools find bugs without running the actual code.
+Linters enforce code style and catch common programming mistakes.

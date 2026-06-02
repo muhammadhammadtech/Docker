@@ -1,0 +1,80 @@
+Apache Spark is a unified analytics engine for large scale data processing.
+It provides high level APIs in Java Scala Python and R language.
+Spark supports a rich set of higher level tools for processing.
+These include Spark SQL for structured data processing tasks.
+MLlib is used for machine learning workloads in Spark clusters.
+GraphX is the component for graph processing in Apache Spark.
+Spark Streaming enables scalable fault tolerant stream processing.
+The core abstraction in Spark is the Resilient Distributed Dataset.
+RDDs are immutable distributed collections of objects across nodes.
+Spark can run on Hadoop YARN Kubernetes Mesos or standalone mode.
+It reads data from HDFS S3 Cassandra HBase and many other sources.
+Spark performs in memory computation to improve processing speed.
+This makes Spark much faster than traditional MapReduce systems.
+Docker allows you to package applications into portable containers.
+Containers are lightweight and portable execution environments today.
+Docker Compose is used to define multi container applications easily.
+A YAML file describes the services networks and volumes configuration.
+Each service runs in its own container with isolated resources.
+Bridge networks allow containers to communicate with each other.
+Volumes allow data to persist beyond the container lifecycle easily.
+The master node in Spark schedules tasks across all worker nodes.
+Worker nodes receive tasks and execute them in parallel processing.
+Executors are JVM processes launched on worker nodes for tasks.
+Each executor runs multiple tasks concurrently inside Spark cluster.
+Spark jobs are divided into stages based on shuffle boundaries.
+Stages are further divided into tasks that run in parallel fashion.
+The driver program coordinates the entire Spark application execution.
+Data locality is very important for performance in distributed systems.
+Spark tries to schedule tasks close to the data they will process.
+Broadcast variables allow read only data to be cached on workers.
+Accumulators are variables that can only be added to by workers.
+PySpark is the Python API for Apache Spark data processing.
+It provides a DataFrame API similar to pandas dataframes.
+DataFrames are distributed collections organized into named columns.
+Spark SQL can query structured data using standard SQL syntax.
+Schema inference allows Spark to automatically detect data types.
+Partitions determine how data is distributed across the cluster.
+More partitions can improve parallelism but add overhead costs.
+Caching a DataFrame keeps it in memory for repeated data access.
+Checkpointing saves RDD lineage to disk for fault tolerance.
+Spark history server records completed application execution details.
+Metrics can be published to Prometheus Graphite or other systems.
+Configuration can be set via spark defaults conf or programmatically.
+Resource managers allocate CPU and memory to Spark applications.
+Dynamic allocation adjusts executor count based on workload demand.
+Serialization formats like Kryo can improve Spark performance.
+Tungsten engine optimizes memory usage and CPU efficiency in Spark.
+Catalyst optimizer improves query execution plans automatically.
+Adaptive query execution adjusts plans at runtime in Spark.
+Spark Connect provides a client server architecture for remote access.
+Apache Spark is a unified analytics engine for large scale data processing.
+It provides high level APIs in Java Scala Python and R language.
+Spark supports a rich set of higher level tools for processing.
+These include Spark SQL for structured data processing tasks.
+MLlib is used for machine learning workloads in Spark clusters.
+GraphX is the component for graph processing in Apache Spark.
+Spark Streaming enables scalable fault tolerant stream processing.
+The core abstraction in Spark is the Resilient Distributed Dataset.
+RDDs are immutable distributed collections of objects across nodes.
+Spark can run on Hadoop YARN Kubernetes Mesos or standalone mode.
+It reads data from HDFS S3 Cassandra HBase and many other sources.
+Spark performs in memory computation to improve processing speed.
+This makes Spark much faster than traditional MapReduce systems.
+Docker allows you to package applications into portable containers.
+Containers are lightweight and portable execution environments today.
+Docker Compose is used to define multi container applications easily.
+A YAML file describes the services networks and volumes configuration.
+Each service runs in its own container with isolated resources.
+Bridge networks allow containers to communicate with each other.
+Volumes allow data to persist beyond the container lifecycle easily.
+The master node in Spark schedules tasks across all worker nodes.
+Worker nodes receive tasks and execute them in parallel processing.
+Executors are JVM processes launched on worker nodes for tasks.
+Each executor runs multiple tasks concurrently inside Spark cluster.
+Spark jobs are divided into stages based on shuffle boundaries.
+Stages are further divided into tasks that run in parallel fashion.
+The driver program coordinates the entire Spark application execution.
+Data locality is very important for performance in distributed systems.
+Spark tries to schedule tasks close to the data they will process.
+Broadcast variables allow read only data to be cached on workers.

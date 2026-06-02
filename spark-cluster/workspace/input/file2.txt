@@ -1,0 +1,80 @@
+Distributed computing allows tasks to run on multiple machines.
+Fault tolerance ensures the system keeps running despite failures.
+Replication stores multiple copies of data across different nodes.
+Load balancing distributes work evenly to prevent bottlenecks.
+Horizontal scaling adds more machines to increase total capacity.
+Vertical scaling adds more resources to an existing single machine.
+Microservices architecture breaks applications into small services.
+Each microservice can be deployed and scaled independently online.
+Service discovery allows services to find each other dynamically.
+Health checks monitor whether a service is running correctly now.
+Container orchestration manages the lifecycle of many containers.
+Kubernetes is the most popular container orchestration platform today.
+Pods are the smallest deployable units in Kubernetes clusters.
+Deployments manage replica sets and rolling updates in Kubernetes.
+Services provide stable network endpoints for pods in Kubernetes.
+ConfigMaps store non secret configuration data in Kubernetes.
+Secrets store sensitive information like passwords and tokens safely.
+Persistent volumes provide storage that outlives individual pods.
+Namespaces provide isolation between different teams or projects.
+RBAC controls who can access which Kubernetes resources safely.
+Ingress controllers manage external access to cluster services.
+Network policies control traffic flow between pods in Kubernetes.
+Helm charts package Kubernetes applications for easy deployment.
+Operators extend Kubernetes to manage complex stateful applications.
+Custom resource definitions add new resource types to Kubernetes.
+Big data processing requires handling massive volumes of information.
+Batch processing handles large amounts of data at scheduled intervals.
+Stream processing handles data in real time as it arrives today.
+Lambda architecture combines batch and stream processing layers.
+Kappa architecture simplifies this by using only stream processing.
+Data lakes store raw data in its native format without structure.
+Data warehouses store structured processed data for analytics work.
+ETL stands for extract transform and load in data engineering.
+ELT moves transformation after loading into the target data system.
+Apache Kafka is a distributed event streaming platform for data.
+Topics in Kafka are categories to which records are published.
+Producers write data to Kafka topics for consumers to read later.
+Consumers read data from Kafka topics in consumer groups.
+Consumer groups allow parallel processing of topic partitions.
+Zookeeper coordinates distributed systems and manages metadata.
+Apache Flink is another powerful stream processing framework.
+Flink provides exactly once processing semantics for data streams.
+Watermarks handle late arriving events in stream processing systems.
+Windows group stream events into finite buckets for aggregation.
+Tumbling windows are fixed size non overlapping time intervals.
+Sliding windows overlap with each other over a time period.
+Session windows group events separated by gaps of inactivity.
+Cloud computing provides on demand access to computing resources.
+Pay as you go pricing reduces upfront infrastructure costs significantly.
+Auto scaling adjusts resources based on current workload demand.
+Distributed computing allows tasks to run on multiple machines.
+Fault tolerance ensures the system keeps running despite failures.
+Replication stores multiple copies of data across different nodes.
+Load balancing distributes work evenly to prevent bottlenecks.
+Horizontal scaling adds more machines to increase total capacity.
+Vertical scaling adds more resources to an existing single machine.
+Microservices architecture breaks applications into small services.
+Each microservice can be deployed and scaled independently online.
+Service discovery allows services to find each other dynamically.
+Health checks monitor whether a service is running correctly now.
+Container orchestration manages the lifecycle of many containers.
+Kubernetes is the most popular container orchestration platform today.
+Pods are the smallest deployable units in Kubernetes clusters.
+Deployments manage replica sets and rolling updates in Kubernetes.
+Services provide stable network endpoints for pods in Kubernetes.
+ConfigMaps store non secret configuration data in Kubernetes.
+Secrets store sensitive information like passwords and tokens safely.
+Persistent volumes provide storage that outlives individual pods.
+Namespaces provide isolation between different teams or projects.
+RBAC controls who can access which Kubernetes resources safely.
+Ingress controllers manage external access to cluster services.
+Network policies control traffic flow between pods in Kubernetes.
+Helm charts package Kubernetes applications for easy deployment.
+Operators extend Kubernetes to manage complex stateful applications.
+Custom resource definitions add new resource types to Kubernetes.
+Big data processing requires handling massive volumes of information.
+Batch processing handles large amounts of data at scheduled intervals.
+Stream processing handles data in real time as it arrives today.
+Lambda architecture combines batch and stream processing layers.
+Kappa architecture simplifies this by using only stream processing.

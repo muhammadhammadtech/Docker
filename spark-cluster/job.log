@@ -1,0 +1,84 @@
+26/06/02 06:59:45 INFO SparkContext: Running Spark version 3.5.7
+26/06/02 06:59:45 INFO SparkContext: OS info Linux, 6.14.0-1018-aws, amd64
+26/06/02 06:59:45 INFO SparkContext: Java version 17.0.18
+26/06/02 06:59:45 WARN NativeCodeLoader: Unable to load native-hadoop library for your platform... using builtin-java classes where applicable
+26/06/02 06:59:45 INFO ResourceUtils: ==============================================================
+26/06/02 06:59:45 INFO ResourceUtils: No custom resources configured for spark.driver.
+26/06/02 06:59:45 INFO ResourceUtils: ==============================================================
+26/06/02 06:59:45 INFO SparkContext: Submitted application: TextAnalytics
+26/06/02 06:59:45 INFO ResourceProfile: Default ResourceProfile created, executor resources: Map(cores -> name: cores, amount: 1, script: , vendor: , memory -> name: memory, amount: 1024, script: , vendor: , offHeap -> name: offHeap, amount: 0, script: , vendor: ), task resources: Map(cpus -> name: cpus, amount: 1.0)
+26/06/02 06:59:45 INFO ResourceProfile: Limiting resource is cpus at 1 tasks per executor
+26/06/02 06:59:45 INFO ResourceProfileManager: Added ResourceProfile id: 0
+26/06/02 06:59:45 INFO SecurityManager: Changing view acls to: root
+26/06/02 06:59:45 INFO SecurityManager: Changing modify acls to: root
+26/06/02 06:59:45 INFO SecurityManager: Changing view acls groups to: 
+26/06/02 06:59:45 INFO SecurityManager: Changing modify acls groups to: 
+26/06/02 06:59:45 INFO SecurityManager: SecurityManager: authentication disabled; ui acls disabled; users with view permissions: root; groups with view permissions: EMPTY; users with modify permissions: root; groups with modify permissions: EMPTY
+26/06/02 06:59:46 INFO Utils: Successfully started service 'sparkDriver' on port 33785.
+26/06/02 06:59:46 INFO SparkEnv: Registering MapOutputTracker
+26/06/02 06:59:46 INFO SparkEnv: Registering BlockManagerMaster
+26/06/02 06:59:46 INFO BlockManagerMasterEndpoint: Using org.apache.spark.storage.DefaultTopologyMapper for getting topology information
+26/06/02 06:59:46 INFO BlockManagerMasterEndpoint: BlockManagerMasterEndpoint up
+26/06/02 06:59:46 INFO SparkEnv: Registering BlockManagerMasterHeartbeat
+26/06/02 06:59:46 INFO DiskBlockManager: Created local directory at /tmp/blockmgr-2b2a03c3-3031-4957-8ca8-ca9b5431aca1
+26/06/02 06:59:46 INFO MemoryStore: MemoryStore started with capacity 434.4 MiB
+26/06/02 06:59:46 INFO SparkEnv: Registering OutputCommitCoordinator
+26/06/02 06:59:46 INFO JettyUtils: Start Jetty 0.0.0.0:4040 for SparkUI
+26/06/02 06:59:46 INFO Utils: Successfully started service 'SparkUI' on port 4040.
+26/06/02 06:59:46 INFO StandaloneAppClient$ClientEndpoint: Connecting to master spark://spark-master:7077...
+26/06/02 06:59:47 INFO TransportClientFactory: Successfully created connection to spark-master/172.18.0.2:7077 after 57 ms (0 ms spent in bootstraps)
+26/06/02 06:59:47 INFO StandaloneSchedulerBackend: Connected to Spark cluster with app ID app-20260602065947-0000
+26/06/02 06:59:47 INFO Utils: Successfully started service 'org.apache.spark.network.netty.NettyBlockTransferService' on port 40251.
+26/06/02 06:59:47 INFO NettyBlockTransferService: Server created on 10b44163c250:40251
+26/06/02 06:59:47 INFO BlockManager: Using org.apache.spark.storage.RandomBlockReplicationPolicy for block replication policy
+26/06/02 06:59:47 INFO BlockManagerMaster: Registering BlockManager BlockManagerId(driver, 10b44163c250, 40251, None)
+26/06/02 06:59:47 INFO BlockManagerMasterEndpoint: Registering block manager 10b44163c250:40251 with 434.4 MiB RAM, BlockManagerId(driver, 10b44163c250, 40251, None)
+26/06/02 06:59:47 INFO BlockManagerMaster: Registered BlockManager BlockManagerId(driver, 10b44163c250, 40251, None)
+26/06/02 06:59:47 INFO StandaloneAppClient$ClientEndpoint: Executor added: app-20260602065947-0000/0 on worker-20260602065756-172.18.0.3-34951 (172.18.0.3:34951) with 1 core(s)
+26/06/02 06:59:47 INFO BlockManager: Initialized BlockManager: BlockManagerId(driver, 10b44163c250, 40251, None)
+26/06/02 06:59:47 INFO StandaloneSchedulerBackend: Granted executor ID app-20260602065947-0000/0 on hostPort 172.18.0.3:34951 with 1 core(s), 1024.0 MiB RAM
+26/06/02 06:59:47 INFO StandaloneAppClient$ClientEndpoint: Executor added: app-20260602065947-0000/1 on worker-20260602065756-172.18.0.3-34951 (172.18.0.3:34951) with 1 core(s)
+26/06/02 06:59:47 INFO StandaloneSchedulerBackend: Granted executor ID app-20260602065947-0000/1 on hostPort 172.18.0.3:34951 with 1 core(s), 1024.0 MiB RAM
+26/06/02 06:59:47 INFO StandaloneAppClient$ClientEndpoint: Executor added: app-20260602065947-0000/2 on worker-20260602065756-172.18.0.4-38861 (172.18.0.4:38861) with 1 core(s)
+26/06/02 06:59:47 INFO StandaloneSchedulerBackend: Granted executor ID app-20260602065947-0000/2 on hostPort 172.18.0.4:38861 with 1 core(s), 1024.0 MiB RAM
+26/06/02 06:59:47 INFO StandaloneAppClient$ClientEndpoint: Executor added: app-20260602065947-0000/3 on worker-20260602065756-172.18.0.4-38861 (172.18.0.4:38861) with 1 core(s)
+26/06/02 06:59:47 INFO StandaloneSchedulerBackend: Granted executor ID app-20260602065947-0000/3 on hostPort 172.18.0.4:38861 with 1 core(s), 1024.0 MiB RAM
+26/06/02 06:59:48 INFO StandaloneSchedulerBackend: SchedulerBackend is ready for scheduling beginning after reached minRegisteredResourcesRatio: 0.0
+26/06/02 06:59:49 INFO StandaloneAppClient$ClientEndpoint: Executor updated: app-20260602065947-0000/1 is now RUNNING
+26/06/02 06:59:49 INFO StandaloneAppClient$ClientEndpoint: Executor updated: app-20260602065947-0000/0 is now RUNNING
+26/06/02 06:59:49 INFO StandaloneAppClient$ClientEndpoint: Executor updated: app-20260602065947-0000/2 is now RUNNING
+26/06/02 06:59:49 INFO StandaloneAppClient$ClientEndpoint: Executor updated: app-20260602065947-0000/3 is now RUNNING
+
+============================================================
+Files found: ['/workspace/input/file3.txt', '/workspace/input/file1.txt', '/workspace/input/file2.txt']
+============================================================
+
+26/06/02 07:00:09 WARN TaskSchedulerImpl: Initial job has not accepted any resources; check your cluster UI to ensure that workers are registered and have sufficient resources
+
+============================================================
+Per-File Summary:
+============================================================
+  File: file3.txt
+    Lines: 80 | Words: 727 | Avg Length: 66.62 | Top Word: code
+  File: file1.txt
+    Lines: 80 | Words: 787 | Avg Length: 65.58 | Top Word: spark
+  File: file2.txt
+    Lines: 80 | Words: 714 | Avg Length: 65.03 | Top Word: data
+
+CSV written to: /workspace/output/summary.csv
+
+============================================================
+TOP 10 WORDS ACROSS ALL FILES:
+============================================================
+  data                      43
+  spark                     36
+  code                      19
+  processing                18
+  python                    17
+  allow                     14
+  today.                    14
+  distributed               14
+  each                      13
+  kubernetes                12
+============================================================
+

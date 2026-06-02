@@ -1,0 +1,4 @@
+filename,line_count,word_count,avg_line_length,top_word
+file3.txt,80,727,66.62,code
+file1.txt,80,787,65.58,spark
+file2.txt,80,714,65.03,data
