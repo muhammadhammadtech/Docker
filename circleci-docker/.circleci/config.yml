@@ -1,0 +1,167 @@
+version: 2.1
+
+jobs:
+
+  build:
+    docker:
+      - image: cimg/node:18.17
+    steps:
+      - checkout
+
+      # Cache restore for node_modules
+      - restore_cache:
+          keys:
+            - node-deps-v1-{{ checksum "app/package.json" }}
+            - node-deps-v1-
+
+      - run:
+          name: Install Dependencies
+          command: |
+            cd app
+            npm install
+
+      # Save cache
+      - save_cache:
+          paths:
+            - app/node_modules
+          key: node-deps-v1-{{ checksum "app/package.json" }}
+
+      # Docker build
+      - setup_remote_docker:
+          docker_layer_caching: true
+
+      - run:
+          name: Build Docker Image
+          command: |
+            docker build -t $DOCKER_USERNAME/circleci-lab:$CIRCLE_SHA1 ./app
+
+      # Save image as tar for workspace sharing
+      - run:
+          name: Save Docker Image to Tar
+          command: |
+            mkdir -p /tmp/docker-cache
+            docker save -o /tmp/docker-cache/image.tar $DOCKER_USERNAME/circleci-lab:$CIRCLE_SHA1
+
+      # Persist tar to workspace
+      - persist_to_workspace:
+          root: /tmp/docker-cache
+          paths:
+            - image.tar
+
+  test:
+    docker:
+      - image: cimg/base:stable
+    steps:
+      - setup_remote_docker:
+          docker_layer_caching: true
+
+      # Load image from workspace
+      - attach_workspace:
+          at: /tmp/docker-cache
+
+      - run:
+          name: Load Docker Image
+          command: docker load -i /tmp/docker-cache/image.tar
+
+      - run:
+          name: Run Container and Test Health Endpoint
+          command: |
+            docker run -d --name test-container -p 3000:3000 $DOCKER_USERNAME/circleci-lab:$CIRCLE_SHA1
+            sleep 5
+            RESPONSE=$(docker exec test-container wget -qO- http://localhost:3000/health)
+            echo "Health response: $RESPONSE"
+            echo $RESPONSE | grep -q '"status":"healthy"' && echo "Health check PASSED" || (echo "Health check FAILED" && exit 1)
+
+  validate:
+    docker:
+      - image: cimg/base:stable
+    steps:
+      - setup_remote_docker:
+          docker_layer_caching: true
+
+      - attach_workspace:
+          at: /tmp/docker-cache
+
+      - run:
+          name: Load Docker Image
+          command: docker load -i /tmp/docker-cache/image.tar
+
+      - run:
+          name: Validate Health Endpoint (10 retries, 5s delay)
+          command: |
+            docker run -d --name validate-container -p 3000:3000 $DOCKER_USERNAME/circleci-lab:$CIRCLE_SHA1
+            sleep 3
+
+            MAX_ATTEMPTS=10
+            ATTEMPT=0
+            SUCCESS=0
+
+            while [ $ATTEMPT -lt $MAX_ATTEMPTS ]; do
+              ATTEMPT=$((ATTEMPT + 1))
+              echo "Attempt $ATTEMPT of $MAX_ATTEMPTS..."
+              
+              RESPONSE=$(docker exec validate-container wget -qO- http://localhost:3000/health 2>/dev/null || echo "")
+              echo "Response: $RESPONSE"
+              
+              if echo "$RESPONSE" | grep -q '"status":"healthy"'; then
+                echo "Validation PASSED on attempt $ATTEMPT"
+                SUCCESS=1
+                break
+              fi
+              
+              sleep 5
+            done
+
+            if [ $SUCCESS -eq 0 ]; then
+              echo "Validation FAILED after $MAX_ATTEMPTS attempts"
+              exit 1
+            fi
+
+  push:
+    docker:
+      - image: cimg/base:stable
+    steps:
+      - setup_remote_docker:
+          docker_layer_caching: true
+
+      - attach_workspace:
+          at: /tmp/docker-cache
+
+      - run:
+          name: Load Docker Image
+          command: docker load -i /tmp/docker-cache/image.tar
+
+      - run:
+          name: Login to Docker Hub
+          command: echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin
+
+      - run:
+          name: Tag and Push Image
+          command: |
+            # Tag with SHA
+            docker tag $DOCKER_USERNAME/circleci-lab:$CIRCLE_SHA1 $DOCKER_USERNAME/circleci-lab:$CIRCLE_SHA1
+            # Tag with latest
+            docker tag $DOCKER_USERNAME/circleci-lab:$CIRCLE_SHA1 $DOCKER_USERNAME/circleci-lab:latest
+            # Push both tags
+            docker push $DOCKER_USERNAME/circleci-lab:$CIRCLE_SHA1
+            docker push $DOCKER_USERNAME/circleci-lab:latest
+
+workflows:
+  build-test-push:
+    jobs:
+      - build
+
+      - test:
+          requires:
+            - build
+
+      - validate:
+          requires:
+            - test
+
+      - push:
+          requires:
+            - validate
+          filters:
+            branches:
+              only: main

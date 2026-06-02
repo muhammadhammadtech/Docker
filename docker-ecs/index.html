@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>My ECS Web App</title>
+    <style>
+        body { font-family: Arial, sans-serif; text-align: center; margin-top: 50px; }
+        .container { background-color: #f0f0f0; padding: 20px; border-radius: 10px; display: inline-block; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Welcome to My ECS Application!</h1>
+        <p>This application is running on Amazon ECS</p>
+        <p>Container ID: <span id="hostname"></span></p>
+    </div>
+    <script>
+        document.getElementById('hostname').textContent = window.location.hostname;
+    </script>
+</body>
+</html>

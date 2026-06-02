@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>High Availability Web App</title>
+    <style>
+        body { font-family: Arial, sans-serif; text-align: center; margin-top: 50px; }
+        .container { max-width: 600px; margin: 0 auto; }
+        .hostname { color: #007acc; font-weight: bold; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>High Availability Web Application</h1>
+        <p>This application is running in Docker Swarm mode</p>
+        <p>Server hostname: <span class="hostname" id="hostname"></span></p>
+        <p>Current time: <span id="time"></span></p>
+    </div>
+    <script>
+        document.getElementById('hostname').textContent = window.location.hostname;
+        document.getElementById('time').textContent = new Date().toLocaleString();
+        setInterval(() => {
+            document.getElementById('time').textContent = new Date().toLocaleString();
+        }, 1000);
+    </script>
+</body>
+</html>

@@ -4,22 +4,37 @@ services:
   zookeeper:
     image: confluentinc/cp-zookeeper:7.4.0
     hostname: zookeeper
+<<<<<<< HEAD
     container_name: zookeeper
+=======
+    container_name: kafka-zookeeper
+>>>>>>> 344a72fb1bc0b48bcb434d06c6433b50f09fc6e5
     ports:
       - "2181:2181"
     environment:
       ZOOKEEPER_CLIENT_PORT: 2181
       ZOOKEEPER_TICK_TIME: 2000
+<<<<<<< HEAD
     volumes:
       - ./data/zookeeper:/var/lib/zookeeper/data
       - ./logs/zookeeper:/var/lib/zookeeper/log
+=======
+      ZOOKEEPER_SYNC_LIMIT: 2
+    volumes:
+      - zookeeper-data:/var/lib/zookeeper/data
+      - zookeeper-logs:/var/lib/zookeeper/log
+>>>>>>> 344a72fb1bc0b48bcb434d06c6433b50f09fc6e5
     networks:
       - kafka-network
 
   kafka:
     image: confluentinc/cp-kafka:7.4.0
     hostname: kafka
+<<<<<<< HEAD
     container_name: kafka
+=======
+    container_name: kafka-broker
+>>>>>>> 344a72fb1bc0b48bcb434d06c6433b50f09fc6e5
     depends_on:
       - zookeeper
     ports:
@@ -38,8 +53,12 @@ services:
       KAFKA_JMX_HOSTNAME: localhost
       KAFKA_AUTO_CREATE_TOPICS_ENABLE: 'true'
     volumes:
+<<<<<<< HEAD
       - ./data/kafka:/var/lib/kafka/data
       - ./logs/kafka:/var/log/kafka
+=======
+      - kafka-data:/var/lib/kafka/data
+>>>>>>> 344a72fb1bc0b48bcb434d06c6433b50f09fc6e5
     networks:
       - kafka-network
 
@@ -57,6 +76,51 @@ services:
     networks:
       - kafka-network
 
+<<<<<<< HEAD
+=======
+  producer:
+    build: ./producer
+    container_name: kafka-producer
+    depends_on:
+      - kafka
+    networks:
+      - kafka-network
+    restart: unless-stopped
+
+  consumer:
+    build: ./consumer
+    container_name: kafka-consumer
+    depends_on:
+      - kafka
+    networks:
+      - kafka-network
+    restart: unless-stopped
+
+  stream-processor:
+    build: ./stream-processor
+    container_name: kafka-stream-processor
+    depends_on:
+      - kafka
+    networks:
+      - kafka-network
+    restart: unless-stopped
+
+  alert-consumer:
+    build: ./stream-processor
+    container_name: kafka-alert-consumer
+    depends_on:
+      - kafka
+    networks:
+      - kafka-network
+    command: ["python", "alert_consumer.py"]
+    restart: unless-stopped
+
+volumes:
+  zookeeper-data:
+  zookeeper-logs:
+  kafka-data:
+
+>>>>>>> 344a72fb1bc0b48bcb434d06c6433b50f09fc6e5
 networks:
   kafka-network:
     driver: bridge
