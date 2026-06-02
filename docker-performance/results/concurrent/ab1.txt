@@ -1,0 +1,47 @@
+time="2026-06-02T06:36:00Z" level=warning msg="/home/ubuntu/lab104/docker-compose.yml: the attribute `version` is obsolete, it will be ignored, please remove it to avoid potential confusion"
+This is ApacheBench, Version 2.3 <$Revision: 1879490 $>
+Copyright 1996 Adam Twiss, Zeus Technology Ltd, http://www.zeustech.net/
+Licensed to The Apache Software Foundation, http://www.apache.org/
+
+Benchmarking lab104-webapp (be patient)
+Completed 100 requests
+Completed 200 requests
+Completed 300 requests
+Finished 300 requests
+
+
+Server Software:        
+Server Hostname:        lab104-webapp
+Server Port:            3000
+
+Document Path:          /
+Document Length:        19 bytes
+
+Concurrency Level:      10
+Time taken for tests:   0.735 seconds
+Complete requests:      300
+Failed requests:        0
+Total transferred:      36000 bytes
+HTML transferred:       5700 bytes
+Requests per second:    408.35 [#/sec] (mean)
+Time per request:       24.489 [ms] (mean)
+Time per request:       2.449 [ms] (mean, across all concurrent requests)
+Transfer rate:          47.85 [Kbytes/sec] received
+
+Connection Times (ms)
+              min  mean[+/-sd] median   max
+Connect:        0    0   0.2      0       1
+Processing:    16   24   5.3     22      36
+Waiting:       11   23   5.3     22      36
+Total:         16   24   5.3     22      36
+
+Percentage of the requests served within a certain time (ms)
+  50%     22
+  66%     25
+  75%     27
+  80%     30
+  90%     33
+  95%     34
+  98%     35
+  99%     36
+ 100%     36 (longest request)

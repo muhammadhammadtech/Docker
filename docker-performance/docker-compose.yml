@@ -1,0 +1,33 @@
+version: '3.8'
+
+networks:
+  lab104-net:
+    driver: bridge
+
+services:
+  webapp:
+    build: ./app
+    container_name: lab104-webapp
+    networks:
+      - lab104-net
+
+  ab-runner-1:
+    build: ./ab-image
+    container_name: lab104-ab1
+    networks:
+      - lab104-net
+    command: sleep infinity
+
+  ab-runner-2:
+    build: ./ab-image
+    container_name: lab104-ab2
+    networks:
+      - lab104-net
+    command: sleep infinity
+
+  siege-runner:
+    build: ./siege-image
+    container_name: lab104-siege1
+    networks:
+      - lab104-net
+    command: sleep infinity

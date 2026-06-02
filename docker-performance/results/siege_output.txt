@@ -1,0 +1,16 @@
+New configuration template added to /root/.siege
+Run siege -C to view the current settings in that file
+
+{	"transactions":			         500,
+	"availability":			      100.00,
+	"elapsed_time":			        0.53,
+	"data_transferred":		        0.01,
+	"response_time":		        0.01,
+	"transaction_rate":		      943.40,
+	"throughput":			        0.02,
+	"concurrency":			        9.81,
+	"successful_transactions":	         500,
+	"failed_transactions":		           0,
+	"longest_transaction":		        0.02,
+	"shortest_transaction":		        0.00
+}

@@ -1,0 +1,17 @@
+time="2026-06-02T06:36:00Z" level=warning msg="/home/ubuntu/lab104/docker-compose.yml: the attribute `version` is obsolete, it will be ignored, please remove it to avoid potential confusion"
+New configuration template added to /root/.siege
+Run siege -C to view the current settings in that file
+
+{	"transactions":			         300,
+	"availability":			      100.00,
+	"elapsed_time":			        0.71,
+	"data_transferred":		        0.01,
+	"response_time":		        0.02,
+	"transaction_rate":		      422.54,
+	"throughput":			        0.01,
+	"concurrency":			        9.70,
+	"successful_transactions":	         300,
+	"failed_transactions":		           0,
+	"longest_transaction":		        0.04,
+	"shortest_transaction":		        0.00
+}
