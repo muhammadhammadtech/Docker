@@ -30,7 +30,7 @@ while true; do
         echo
         echo "[Nodes]"
         docker node ls
-        echo
+        echo "====================================================="
         echo "[Services]"
         docker service ls
         echo
