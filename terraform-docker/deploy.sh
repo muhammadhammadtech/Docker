@@ -1,57 +1,93 @@
 #!/bin/bash
-set -e
+
+set -euo pipefail
 
 if [ "$#" -ne 2 ]; then
-  echo "Usage: bash deploy.sh <environment> <version>"
-  exit 1
+    echo "Usage: ./deploy.sh <environment> <version>"
+    exit 1
 fi
 
-ENVIRONMENT=$1
-VERSION=$2
+ENVIRONMENT="$1"
+VERSION="$2"
+
 TFVARS_FILE="${ENVIRONMENT}.tfvars"
+PLAN_FILE="tfplan-${ENVIRONMENT}-$(date +%Y%m%d%H%M%S)"
+LOG_FILE="deploy-${ENVIRONMENT}-$(date +%F-%H%M%S).log"
 
-if [ ! -f "$TFVARS_FILE" ]; then
-  echo "ERROR: $TFVARS_FILE not found!"
-  exit 1
-fi
+log() {
+    echo "[$(date '+%F %T')] $1" | tee -a "$LOG_FILE"
+}
 
-echo "===> Deploying to: $ENVIRONMENT (version: $VERSION)"
+check_prerequisites() {
+
+    for cmd in terraform jq curl; do
+        command -v "$cmd" >/dev/null || {
+            log "$cmd is not installed."
+            exit 1
+        }
+    done
+}
+
+START_TIME=$(date +%s)
+
+check_prerequisites
+
+[ -f "$TFVARS_FILE" ] || {
+    log "$TFVARS_FILE not found."
+    exit 1
+}
+
+log "Deploying environment: $ENVIRONMENT"
+log "Application version: $VERSION"
 
 if [ ! -d ".terraform" ]; then
-  echo "===> Running terraform init..."
-  terraform init
+    terraform init
 fi
 
-# Deploy se PEHLE current state ka snapshot lo
-if [ -f "terraform.tfstate" ]; then
-  cp terraform.tfstate "terraform.tfstate.pre_${ENVIRONMENT}_deploy"
-  echo "===> State snapshot saved: terraform.tfstate.pre_${ENVIRONMENT}_deploy"
+terraform fmt -check
+terraform validate
+
+if [ -f terraform.tfstate ]; then
+    cp terraform.tfstate "terraform.tfstate.pre_${ENVIRONMENT}_deploy"
+    log "Terraform state snapshot created."
 fi
 
-echo "===> Running terraform plan..."
-terraform plan -var-file="$TFVARS_FILE" -out=tfplan
+terraform plan \
+    -var-file="$TFVARS_FILE" \
+    -out="$PLAN_FILE"
 
-echo "===> Running terraform apply..."
-terraform apply tfplan
+terraform apply "$PLAN_FILE"
 
-# Health checks
-echo "===> Running health checks..."
-PORTS=$(terraform output -json external_ports | jq -r '.[]')
 FAILED=0
 
-for PORT in $PORTS; do
-  HTTP_CODE=$(curl -s -o /dev/null -w "%{http_code}" --max-time 5 "http://localhost:${PORT}" || echo "000")
-  if [ "$HTTP_CODE" = "200" ]; then
-    echo "  ✓ http://localhost:${PORT} => HTTP $HTTP_CODE"
-  else
-    echo "  ✗ http://localhost:${PORT} => HTTP $HTTP_CODE (FAILED)"
-    FAILED=1
-  fi
+log "Running health checks..."
+
+PORTS=$(terraform output -json external_ports | jq -r '.[]')
+
+for PORT in $PORTS
+do
+    STATUS=$(curl -s \
+        -o /dev/null \
+        -w "%{http_code}" \
+        --max-time 5 \
+        http://localhost:$PORT || echo "000")
+
+    if [ "$STATUS" != "200" ]; then
+        FAILED=1
+        log "Health check failed on port $PORT (HTTP $STATUS)"
+    else
+        log "Healthy: http://localhost:$PORT"
+    fi
 done
 
-if [ "$FAILED" -ne 0 ]; then
-  echo "ERROR: Health checks failed! Run: bash rollback.sh $ENVIRONMENT"
-  exit 1
+if [ "$FAILED" -eq 1 ]; then
+    log "Deployment failed."
+    log "Rollback command:"
+    log "bash rollback.sh $ENVIRONMENT"
+    exit 1
 fi
 
-echo "===> Deployment successful! All containers are healthy."
+END_TIME=$(date +%s)
+
+log "Deployment completed successfully."
+log "Duration: $((END_TIME-START_TIME)) seconds."
