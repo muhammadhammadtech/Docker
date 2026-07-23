@@ -1,17 +1,22 @@
-
 services:
   backend:
     build: ./backend
     container_name: backend-api
+
+    restart: unless-stopped
+
     ports:
       - "${BACKEND_PORT:-3001}:3001"
+
     environment:
-      - NODE_ENV=${NODE_ENV:-development}
-      - PORT=3001
-      - SERVICE_NAME=backend-api
-      - FRONTEND_URL=http://frontend:80
+      NODE_ENV: ${NODE_ENV:-development}
+      PORT: 3001
+      SERVICE_NAME: backend-api
+      FRONTEND_URL: http://frontend:80
+
     networks:
       - microservices-net
+
     healthcheck:
       test: ["CMD", "wget", "--quiet", "--tries=1", "--spider", "http://localhost:3001/health"]
       interval: 30s
@@ -19,18 +24,47 @@ services:
       retries: 3
       start_period: 40s
 
+    stop_grace_period: 30s
+
+    logging:
+      driver: json-file
+      options:
+        max-size: "10m"
+        max-file: "5"
+
+    security_opt:
+      - no-new-privileges:true
+
   frontend:
     build: ./frontend
     container_name: frontend-web
+
+    restart: unless-stopped
+
     ports:
       - "${FRONTEND_PORT:-8080}:80"
+
     environment:
-      - BACKEND_API_URL=http://backend:3001
-      - SERVICE_NAME=frontend-web
+      BACKEND_API_URL: http://backend:3001
+      SERVICE_NAME: frontend-web
+
     depends_on:
-      - backend
+      backend:
+        condition: service_healthy
+
     networks:
       - microservices-net
+
+    stop_grace_period: 30s
+
+    logging:
+      driver: json-file
+      options:
+        max-size: "10m"
+        max-file: "5"
+
+    security_opt:
+      - no-new-privileges:true
 
 networks:
   microservices-net:
